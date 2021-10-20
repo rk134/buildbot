@@ -8,7 +8,7 @@ DEVICE_CODENAME=vince
 GITHUB_USER=kernelhacker69
 GITHUB_EMAIL=rathore889047@gmail.com
 WORK_DIR=$(pwd)/${ROM_NAME}
-JOBS=nproc
+JOBS=8
 
 # Set up git!
 git config --global user.name ${GITHUB_USER}
@@ -30,8 +30,11 @@ git clone -b stable https://github.com/GhostMaster69-dev/android_kernel_xiaomi_v
 
 git clone -b main --depth=1 https://github.com/GhostMaster69-dev/Cosmic-Clang.git prebuilts/clang/host/linux-x86/clang-14
 
+cd ssos
+cd build/soong && git fetch https://github.com/masemoel/build_soong_legion-r 11 && git cherry-pick b45c5ae22f74f1bdbb9bfbdd06ecf7a25033c78b && git cherry-pick e020f2130224fbdbec1f83e3adfd06a9764cca87 && cd ../..
+
 # Start building!
 . build/envsetup.sh
 lunch ssos_vince-userdebug
-make sepolicy -j${JOBS}
+make sepolicy -j1
 
