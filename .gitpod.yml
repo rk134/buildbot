@@ -1,5 +1,6 @@
 image: fr3akyphantom/droid-builder:latest
 tasks:
+  - name: prep for tunnel
   - command: |
       git config --global --unset credential.helper
       apt-get update --fix-missing
