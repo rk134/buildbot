@@ -1,12 +1,12 @@
 # Rom building script for CircleCI
 # coded by bruh™ aka Live0verfl0w
 
-MANIFEST_LINK=git://github.com/ProjectSakura/android.git
-BRANCH=10
-ROM_NAME=lineage
-DEVICE_CODENAME=dreamlte
-GITHUB_USER=Exynos-nigg
-GITHUB_EMAIL=vsht700@gmail.com
+MANIFEST_LINK=git://github.com/ShapeShiftOS/android_manifest.git
+BRANCH=android_11
+ROM_NAME=ssos
+DEVICE_CODENAME=vince
+GITHUB_USER=kernelhacker69
+GITHUB_EMAIL=rathore889047@gmail.com
 WORK_DIR=$(pwd)/${ROM_NAME}
 JOBS=nproc
 
@@ -22,20 +22,16 @@ repo init --depth=1 -u ${MANIFEST_LINK} -b ${BRANCH}
 repo sync --current-branch --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune -j${JOBS}
 
 # clone device sources
-git clone -b lineage-17.1 https://github.com/Sakura-Devices/device_samsung_dreamlte.git device/samsung/dreamlte 
+git clone -b R https://github.com/GhostMaster69-dev/android_device_xiaomi_vince.git device/xiaomi/vince
 
-git clone -b lineage-17.1 https://github.com/Sakura-Devices/device_samsung_universal8895-common.git device/samsung/universal8895-common 
+git clone -b aosp-11 https://github.com/GhostMaster69-dev/android_vendor_xiaomi_vince.git vendor/xiaomi/vince
 
-git clone -b pie https://github.com/Sakura-Devices/kernel_samsung_universal8895.git kernel/samsung/universal8895 
+git clone -b stable https://github.com/GhostMaster69-dev/android_kernel_xiaomi_vince.git kernel/xiaomi/vince
 
-git clone -b lineage-17.1 https://github.com/Sakura-Devices/vendor_samsung_dreamlte.git vendor/samsung/dreamlte 
-
-git clone -b lineage-17.1 https://github.com/Sakura-Devices/vendor_samsung_universal8895-common.git vendor/samsung/universal8895-common 
-
-git clone -b lineage-17.1 https://github.com/LineageOS/android_hardware_samsung.git hardware/samsung
+git clone -b main --depth=1 https://github.com/GhostMaster69-dev/Cosmic-Clang.git prebuilts/clang/host/linux-x86/clang-14
 
 # Start building!
 . build/envsetup.sh
-lunch lineage_${DEVICE_CODENAME}-userdebug
-mka bacon -j${JOBS}
+lunch ssos_vince-userdebug
+make sepolicy -j${JOBS}
 
