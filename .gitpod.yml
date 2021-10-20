@@ -1,0 +1,3 @@
+tasks:
+init: # TODO: install dependencies, build project
+command: # TODO: start app
