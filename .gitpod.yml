@@ -1,9 +1,7 @@
 image: fr3akyphantom/droid-builder:latest
 tasks:
-  - before: >
-      git config --global --unset credential.helper
-tasks:
   - command: |
+      git config --global --unset credential.helper
       apt-get update --fix-missing
       apt-get install -yq dropbear
       apt-get clean 
