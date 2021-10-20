@@ -1,4 +1,14 @@
+image: fr3akyphantom/droid-builder:latest
 tasks:
+  - before: >
+      git config --global --unset credential.helper
+tasks:
+  - command: |
+      apt-get update --fix-missing
+      apt-get install -yq dropbear
+      apt-get clean 
+      rm -rf /var/lib/apt/lists/* /tmp/*
+      curl https://i.jpillora.com/chisel! | bash
   - name: TCP Tunnel
     command: chisel server --socks5
   - name: SSH Server
@@ -26,4 +36,4 @@ ports:
     onOpen: ignore
 
 init: # TODO: install dependencies, build project
-command: # TODO: start app
+command: # TODO
