@@ -34,5 +34,4 @@ ports:
   - port: 2222
     onOpen: ignore
 
-init: # TODO: install dependencies, build project
-command: # TODO
+
